@@ -6,7 +6,7 @@ import { auth, database } from '../misc/firebase';
 const SignIn = () => {
 
 
-    const signInWithProvider = async provider => {
+    const signInWithProvider = async (provider) => {
 
         try {
             const { additionalUserInfo, user } = await auth.signInWithPopup(provider);
@@ -14,24 +14,24 @@ const SignIn = () => {
             if (additionalUserInfo.isNewUser) {
                 await database.ref(`/profiles/${user.uid}`).set({
                     name: user.displayName,
-                    createdAt: firebase.database.ServerValue.TIMESTAMP,
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
                 });
             }
-            
-          Alert.info("Success Login",4000)
+
+            Alert.info("Login Succesful", 4000)
 
         } catch (error) {
-            Alert.error(error,4000)
-        
+            Alert.error(error.message, 4000)
+
         }
 
     }
 
     const onFacebookSignIn = () => {
-        signInWithProvider(new firebase.auth.FacebookAuthProvider())
+        signInWithProvider(new firebase.auth.FacebookAuthProvider());
     }
     const onGoogleSignIn = () => {
-        signInWithProvider(new firebase.auth.GoogleAuthProvider())
+        signInWithProvider(new firebase.auth.GoogleAuthProvider());
     }
 
     return (
@@ -47,11 +47,11 @@ const SignIn = () => {
 
                             <div className="mt-3">
                                 <Button block color="blue" appearance="primary" onClick={onFacebookSignIn}>
-                                <Icon icon="facebook"/>Continue With Facebook
+                                    <Icon icon="facebook" />Continue With Facebook
                                 </Button>
-                                
+
                                 <Button block color="green" appearance="primary" onClick={onGoogleSignIn}>
-                                <Icon icon="google"/>Continue With Google
+                                    <Icon icon="google" />Continue With Google
                                 </Button>
                             </div>
                         </Panel>
