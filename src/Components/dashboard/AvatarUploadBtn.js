@@ -4,6 +4,7 @@ import { Alert, Button, Modal } from 'rsuite';
 import { useProfile } from '../../Context/profile.context';
 import { useModalState } from '../../misc/custom-hooks';
 import { database, storage } from '../../misc/firebase';
+import ProfileAvatar from './ProfileAvatar';
 
 
 const fileInputTypes = ".png,.jpeg,.jpg"
@@ -47,7 +48,7 @@ const AvatarUploadBtn = () => {
 
         setIsLoading(true)
         try {
-            const blob= await getBlob(canvas);
+            const blob = await getBlob(canvas);
 
             const avatarFileRef = storage.ref(`/profile/${profile.uid}`).child('avatar')
 
@@ -72,6 +73,9 @@ const AvatarUploadBtn = () => {
 
     return (
         <div className="mt-3 text-center">
+
+            <ProfileAvatar src ={profile.avatar} name={profile.name} className="width-200 height-200 img-fullsize font-huge" />
+
             <div>
                 <label htmlFor="avatar-upload" className="d-block cursor-pointer padded">
                     Select new avatar
@@ -98,7 +102,7 @@ const AvatarUploadBtn = () => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button block appearance="ghost" onClick={onUploadClick}disabled={isLoading} >Upload new avatar</Button>
+                        <Button block appearance="ghost" onClick={onUploadClick} disabled={isLoading} >Upload new avatar</Button>
                     </Modal.Footer>
                 </Modal>
 
