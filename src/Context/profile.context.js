@@ -34,7 +34,7 @@ export const ProfileProvider = ({ children }) => {
             else {
 
                 if (userRef) {
-                    userRef.off()
+                    userRef.off();
                 }
                 setProfile(null)
                 setisLoading(false)
