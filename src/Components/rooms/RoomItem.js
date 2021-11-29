@@ -3,7 +3,7 @@ import TimeAgo from 'timeago-react';
 
 const RoomItem = ({ room }) => {
 
-    const { createdAt, name } = room;
+    const { createdAt, name,description } = room;
 
     return (
         <div>
@@ -16,7 +16,7 @@ const RoomItem = ({ room }) => {
                 />
             </div>
             <div className="d-flex align-items-center text-black-70">
-                <span>No Messages yet ...</span>
+                <span>{description}</span>
             </div>
         </div>
     )
